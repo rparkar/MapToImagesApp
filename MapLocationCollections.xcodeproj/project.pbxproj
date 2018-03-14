@@ -12,7 +12,6 @@
 		6C5CC4CF2059E313006849DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CC4CE2059E313006849DF /* MapViewController.swift */; };
 		6C5CC4D22059E313006849DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CC4D02059E313006849DF /* Main.storyboard */; };
 		6C5CC4D42059E313006849DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CC4D32059E313006849DF /* Assets.xcassets */; };
-		6C5CC4D72059E313006849DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CC4D52059E313006849DF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,6 @@
 		6C5CC4CE2059E313006849DF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		6C5CC4D12059E313006849DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C5CC4D32059E313006849DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6C5CC4D62059E313006849DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C5CC4D82059E313006849DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		974DB153534C251BD82535AD /* Pods-MapLocationCollections.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapLocationCollections.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections.release.xcconfig"; sourceTree = "<group>"; };
 		D015EF3BADB8B7AE9B18B509 /* Pods-MapLocationCollections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapLocationCollections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 				6C5CC4CE2059E313006849DF /* MapViewController.swift */,
 				6C5CC4D02059E313006849DF /* Main.storyboard */,
 				6C5CC4D32059E313006849DF /* Assets.xcassets */,
-				6C5CC4D52059E313006849DF /* LaunchScreen.storyboard */,
 				6C5CC4D82059E313006849DF /* Info.plist */,
 			);
 			path = MapLocationCollections;
@@ -182,7 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C5CC4D72059E313006849DF /* LaunchScreen.storyboard in Resources */,
 				6C5CC4D42059E313006849DF /* Assets.xcassets in Resources */,
 				6C5CC4D22059E313006849DF /* Main.storyboard in Resources */,
 			);
@@ -265,14 +261,6 @@
 				6C5CC4D12059E313006849DF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6C5CC4D52059E313006849DF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6C5CC4D62059E313006849DF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
