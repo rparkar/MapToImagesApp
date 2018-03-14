@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1411A446B52D4C5668F07AB8 /* Pods_MapLocationCollections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1117C993D1F0D77DC9E276F /* Pods_MapLocationCollections.framework */; };
 		6C5CC4CD2059E313006849DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CC4CC2059E313006849DF /* AppDelegate.swift */; };
 		6C5CC4CF2059E313006849DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CC4CE2059E313006849DF /* MapViewController.swift */; };
 		6C5CC4D22059E313006849DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CC4D02059E313006849DF /* Main.storyboard */; };
@@ -22,6 +23,9 @@
 		6C5CC4D32059E313006849DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C5CC4D62059E313006849DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C5CC4D82059E313006849DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		974DB153534C251BD82535AD /* Pods-MapLocationCollections.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapLocationCollections.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections.release.xcconfig"; sourceTree = "<group>"; };
+		D015EF3BADB8B7AE9B18B509 /* Pods-MapLocationCollections.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapLocationCollections.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections.debug.xcconfig"; sourceTree = "<group>"; };
+		E1117C993D1F0D77DC9E276F /* Pods_MapLocationCollections.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapLocationCollections.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1411A446B52D4C5668F07AB8 /* Pods_MapLocationCollections.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39DA526C32019793400E7299 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1117C993D1F0D77DC9E276F /* Pods_MapLocationCollections.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65C25EF570208167A2E834D7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D015EF3BADB8B7AE9B18B509 /* Pods-MapLocationCollections.debug.xcconfig */,
+				974DB153534C251BD82535AD /* Pods-MapLocationCollections.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6C5CC4C02059E313006849DF = {
 			isa = PBXGroup;
 			children = (
 				6C5CC4CB2059E313006849DF /* MapLocationCollections */,
 				6C5CC4CA2059E313006849DF /* Products */,
+				65C25EF570208167A2E834D7 /* Pods */,
+				39DA526C32019793400E7299 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C5CC4DB2059E313006849DF /* Build configuration list for PBXNativeTarget "MapLocationCollections" */;
 			buildPhases = (
+				63E19A54CEE74A05E695129C /* [CP] Check Pods Manifest.lock */,
 				6C5CC4C52059E313006849DF /* Sources */,
 				6C5CC4C62059E313006849DF /* Frameworks */,
 				6C5CC4C72059E313006849DF /* Resources */,
+				BA25ED3F3FD86DF97E3E7029 /* [CP] Embed Pods Frameworks */,
+				99712988140D61AA933D80A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,6 +189,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		63E19A54CEE74A05E695129C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MapLocationCollections-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99712988140D61AA933D80A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA25ED3F3FD86DF97E3E7029 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MapLocationCollections/Pods-MapLocationCollections-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6C5CC4C52059E313006849DF /* Sources */ = {
@@ -304,6 +387,7 @@
 		};
 		6C5CC4DC2059E313006849DF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D015EF3BADB8B7AE9B18B509 /* Pods-MapLocationCollections.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -318,6 +402,7 @@
 		};
 		6C5CC4DD2059E313006849DF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 974DB153534C251BD82535AD /* Pods-MapLocationCollections.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
