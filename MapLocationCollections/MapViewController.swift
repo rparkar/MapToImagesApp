@@ -25,6 +25,7 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         locationManger.delegate = self
         configureLocationService()
+        addDoubleTap()
 
     }
 
@@ -37,6 +38,33 @@ class MapViewController: UIViewController {
         }
     }
     
+    func addDoubleTap(){
+        let doubleTap = UITapGestureRecognizer(target:self , action: #selector(dropPin))
+        doubleTap.numberOfTapsRequired = 2
+        //doubleTap.delegate = self
+        mapView.addGestureRecognizer(doubleTap)
+    }
+    
+    @objc func dropPin(sender:UITapGestureRecognizer){
+        removePin()
+        //
+        let touchPoint = sender.location(in: mapView) //cordinates on screen where u touch
+        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView) //converts to GPS coordinates
+        
+        //custpm subclass of
+        let annotation = DroppablePin(coordinate: touchCoordinate, identifier: "droppablePin")
+        mapView.addAnnotation(annotation)
+        
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+        print("pin dropped")
+    }
+    
+    func removePin () {
+        for annotation in mapView.annotations {
+            mapView.removeAnnotation(annotation)
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
