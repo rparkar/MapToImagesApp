@@ -83,7 +83,6 @@
 				6C5CC4DF2059E33F006849DF /* view */,
 				6C5CC4DE2059E339006849DF /* controller */,
 				6C5CC4CC2059E313006849DF /* AppDelegate.swift */,
-				6C5CC4CE2059E313006849DF /* MapViewController.swift */,
 				6C5CC4D02059E313006849DF /* Main.storyboard */,
 				6C5CC4D32059E313006849DF /* Assets.xcassets */,
 				6C5CC4D82059E313006849DF /* Info.plist */,
@@ -94,6 +93,7 @@
 		6C5CC4DE2059E339006849DF /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				6C5CC4CE2059E313006849DF /* MapViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
