@@ -69,6 +69,22 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate {
     
+    //custpmise pin with custom color
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation { //if annot is users location
+            return nil
+        } else {
+            let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
+            pinAnnotation.pinTintColor = #colorLiteral(red: 0.9896476865, green: 0.6665952206, blue: 0.3434123397, alpha: 1)
+            pinAnnotation.animatesDrop = true
+            
+            return pinAnnotation
+        }
+        
+
+    }
+    
     func centerMapOnUserLocation() {
         guard let coordinate = locationManger.location?.coordinate else {return}
         
