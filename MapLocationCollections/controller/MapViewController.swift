@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import AlamofireImage
 
 
 class MapViewController: UIViewController {
@@ -29,6 +31,8 @@ class MapViewController: UIViewController {
     var collectionView: UICollectionView?
     var flowLayout = UICollectionViewFlowLayout() //needed when programticly making collectionview
     
+    //array of URLs
+    var imageURLArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,12 +152,40 @@ class MapViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
         print("pin dropped")
+        
+        retrieveURLS(forAnnotation: annotation) { (true) in
+            
+            
+        }
     }
     
     func removePin () {
         for annotation in mapView.annotations {
             mapView.removeAnnotation(annotation)
         }
+    }
+    
+    func retrieveURLS(forAnnotation annotation: DroppablePin, completionHandler: @escaping completionHandler){
+        
+        imageURLArray = []
+        
+        Alamofire.request(flickrURL(forApiKey: API_KEY, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
+            
+            print(response)
+            guard let json = response.result.value as? Dictionary<String, AnyObject> else {return}
+            
+            let photosDict = json["photos"] as! Dictionary<String, AnyObject>
+            let photosDictArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
+            
+            for photo in photosDictArray {
+                let postURL = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                self.imageURLArray.append(postURL)
+            }
+            
+            completionHandler(true)
+        }
+        
+        
     }
 }
 

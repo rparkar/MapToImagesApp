@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias completionHandler = (_ success: Bool) -> ()
+
 let API_KEY = "548335eec518c65ada3111b3f1bcb4bd"
 
 func flickrURL(forApiKey key: String, withAnnotation annotation: DroppablePin, andNumberOfPhotos number: Int ) -> String{
