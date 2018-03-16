@@ -33,6 +33,7 @@ class MapViewController: UIViewController {
     
     //array of URLs
     var imageURLArray = [String]()
+    var imageArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,7 @@ class MapViewController: UIViewController {
     }
     
     func addDoubleTap(){
+        cancelAllSession()
         let doubleTap = UITapGestureRecognizer(target:self , action: #selector(dropPin))
         doubleTap.numberOfTapsRequired = 2
         //doubleTap.delegate = self
@@ -87,6 +89,7 @@ class MapViewController: UIViewController {
     }
     
     @objc func animateViewDown(){
+        
         
         pullUpVIewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.3) {
@@ -135,6 +138,7 @@ class MapViewController: UIViewController {
         removePin()
         removeSpinner()
         removeProgressLable() //to prevent multiple spinners and label
+        cancelAllSession() // remove the old pin session when a new pin is dropper
         
         animateViewUp()
         addSwipe()
@@ -153,10 +157,23 @@ class MapViewController: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
         print("pin dropped")
         
-        retrieveURLS(forAnnotation: annotation) { (true) in
+        retrieveURLS(forAnnotation: annotation) { (finished) in
             
+            if finished == true {
+                self.retrieveImage(completionHandler: { (finished) in
+                    
+                    if finished{
+                        self.spinner?.isHidden = true
+                        self.removeProgressLable()
+                        
+                        //TODO
+                        
+                    }
+                })
+            }
             
         }
+        
     }
     
     func removePin () {
@@ -165,7 +182,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    func retrieveURLS(forAnnotation annotation: DroppablePin, completionHandler: @escaping completionHandler){
+    func retrieveURLS(forAnnotation annotation: DroppablePin, completionHandler: @escaping CompletionHandler){
         
         imageURLArray = []
         
@@ -185,7 +202,35 @@ class MapViewController: UIViewController {
             completionHandler(true)
         }
         
+    }
+    
+    func retrieveImage(completionHandler: @ escaping CompletionHandler){
+        imageArray = [] //clearing out previous images
         
+        for url in imageURLArray {
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                
+                guard let image = response.result.value else {return}
+                self.imageArray.append(image)
+                self.progressLabel?.text = "\(self.imageArray.count)/40 images downloaded"
+                
+                //check if counts are equal in both arrays
+                if self.imageArray.count == self.imageURLArray.count {
+                    completionHandler(true)
+                }
+            })
+            
+        }
+        
+    }
+    
+    //cancel all the sessions when swipe down
+    func cancelAllSession() {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            
+            sessionDataTask.forEach({$0.cancel() })
+            downloadData.forEach({$0.cancel()})
+        }
     }
 }
 
