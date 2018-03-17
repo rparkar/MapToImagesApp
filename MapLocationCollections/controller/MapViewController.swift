@@ -49,6 +49,9 @@ class MapViewController: UIViewController {
         collectionView?.dataSource = self
         collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
+        //for 3D touch previewing
+        registerForPreviewing(with: self, sourceView: collectionView!)
+        
         pullUpView.addSubview(collectionView!)
     }
 
@@ -309,6 +312,27 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
     }
 }
 
+//3D touch class
+extension MapViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexpath = collectionView?.indexPathForItem(at: location) else {return nil}
+        guard let cell = collectionView?.cellForItem(at: indexpath) else {return nil}
+        
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopViewController else {return nil}
+        popVC.initData(image: imageArray[indexpath.row])
+        
+        previewingContext.sourceRect = cell.contentView.frame //show what actual image looks like
+        return popVC
+    
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+        show(viewControllerToCommit, sender: self)
+    }
+}
 
 
 
