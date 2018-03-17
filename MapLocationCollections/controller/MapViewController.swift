@@ -47,7 +47,7 @@ class MapViewController: UIViewController {
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         pullUpView.addSubview(collectionView!)
     }
@@ -122,7 +122,7 @@ class MapViewController: UIViewController {
         progressLabel?.font = UIFont(name: "AvenirNext", size: 18)
         progressLabel?.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         progressLabel?.textAlignment = .center
-        progressLabel?.text = "x/y Photos Loaded"
+       // progressLabel?.text = "x/y Photos Loaded"
         collectionView?.addSubview(progressLabel!)
         
     }
@@ -139,6 +139,11 @@ class MapViewController: UIViewController {
         removeSpinner()
         removeProgressLable() //to prevent multiple spinners and label
         cancelAllSession() // remove the old pin session when a new pin is dropper
+        
+        //to remove and add images of new location
+        imageURLArray = []
+        imageArray = []
+        collectionView?.reloadData()
         
         animateViewUp()
         addSwipe()
@@ -165,8 +170,7 @@ class MapViewController: UIViewController {
                     if finished{
                         self.spinner?.isHidden = true
                         self.removeProgressLable()
-                        
-                        //TODO
+                        self.collectionView?.reloadData() //reload to show images
                         
                     }
                 })
@@ -184,7 +188,7 @@ class MapViewController: UIViewController {
     
     func retrieveURLS(forAnnotation annotation: DroppablePin, completionHandler: @escaping CompletionHandler){
         
-        imageURLArray = []
+       // imageURLArray = []
         
         Alamofire.request(flickrURL(forApiKey: API_KEY, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
             
@@ -205,7 +209,7 @@ class MapViewController: UIViewController {
     }
     
     func retrieveImage(completionHandler: @ escaping CompletionHandler){
-        imageArray = [] //clearing out previous images
+       // imageArray = [] //clearing out previous images
         
         for url in imageURLArray {
             Alamofire.request(url).responseImage(completionHandler: { (response) in
@@ -283,13 +287,17 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else {return UICollectionViewCell()}
+        
+        let imageFromIndex = imageArray[indexPath.row]
+        let imageView = UIImageView(image: imageFromIndex)
+        cell.addSubview(imageView)
+        return cell
     }
 }
 
